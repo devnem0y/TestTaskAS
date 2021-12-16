@@ -43,7 +43,7 @@ public class Session : ScriptableObject
         if (_spawner.TargetTask.Contains((string) arg))
         {
             _currentLevel++;
-            RunManager.instance.StartCoroutine(LevelCompleted());
+            _spawner.StartCoroutine(LevelCompleted());
         }
         else
         {
