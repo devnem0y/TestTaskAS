@@ -10,14 +10,11 @@ public class Session : ScriptableObject
     private int _maxLevel => _levels.Length - 1;
     
     private Spawner _spawner;
-
-    private void Awake()
-    {
-        _spawner = FindObjectOfType<Spawner>();
-    }
     
     public void Subscribe()
     {
+        _spawner = FindObjectOfType<Spawner>();
+
         Dispatcher.OnElementClick += ElementClick;
         Dispatcher.OnRestart += Restart;
     }
