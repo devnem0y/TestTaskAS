@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class RunManager : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class RunManager : MonoBehaviour
 
     private void Start()
     {
+        DOTween.Init();
         _session.Subscribe();
         _session.Run();
     }
