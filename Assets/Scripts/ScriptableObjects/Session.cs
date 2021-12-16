@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Session", menuName = "MyScriptableObject/Session", order = 10)]
@@ -46,17 +46,18 @@ public class Session : ScriptableObject
         if (_spawner.TargetTask.Contains((string) arg))
         {
             _currentLevel++;
-            LevelCompleted();
+            RunManager.instance.StartCoroutine(LevelCompleted());
         }
         else
         {
-            Dispatcher.Send(Event.ON_FAILED);
+            Dispatcher.Send(Event.ON_FAILED, (string) arg);
         }
     }
     
-    private void LevelCompleted()
+    private IEnumerator LevelCompleted()
     {
-        Dispatcher.Send(Event.ON_LEVEL_COMPLETED);
+        Dispatcher.Send(Event.ON_LEVEL_COMPLETED, _spawner.TargetTask);
+        yield return new WaitForSeconds(0.8f);
         if (_currentLevel > _maxLevel)
         {
             Dispatcher.Send(Event.ON_WIN);

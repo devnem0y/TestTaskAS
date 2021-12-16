@@ -6,12 +6,12 @@ public class Dispatcher
     
     public static event Action<object> OnElementClick;
     public static event Action<object> OnGenerationDone;
-    
+    public static event Action<object> OnLevelCompleted;
+    public static event Action<object> OnFailed;
+
     public static event Action OnStart;
     public static event Action OnRestart;
-    public static event Action OnLevelCompleted;
     public static event Action OnWin;
-    public static event Action OnFailed;
 
     #endregion
 
@@ -23,10 +23,8 @@ public class Dispatcher
         {
             case Event.ON_START: return OnStart;
             case Event.ON_RESTART: return OnRestart;
-            case Event.ON_LEVEL_COMPLETED: return OnLevelCompleted;
             case Event.ON_WIN: return OnWin;
-            case Event.ON_FAILED: return OnFailed;
-            
+
             default: throw new ArgumentOutOfRangeException(nameof(e), e, null);
         }
     }
@@ -41,6 +39,8 @@ public class Dispatcher
         {
             case Event.ON_ELEMENT_CLICK: return OnElementClick;
             case Event.ON_GENERATION_DONE: return OnGenerationDone;
+            case Event.ON_LEVEL_COMPLETED: return OnLevelCompleted;
+            case Event.ON_FAILED: return OnFailed;
 
             default: throw new ArgumentOutOfRangeException(nameof(e), e, null);
         }
