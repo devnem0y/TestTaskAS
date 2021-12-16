@@ -10,13 +10,13 @@ public class Session : ScriptableObject
     private int _maxLevel => _levels.Length - 1;
     
     private Spawner _spawner;
-    
-    public void Subscribe()
-    {
-        _spawner = FindObjectOfType<Spawner>();
 
-        Dispatcher.OnElementClick += ElementClick;
+    public void Run()
+    {
+		_spawner = FindObjectOfType<Spawner>();
+		Dispatcher.OnElementClick += ElementClick;
         Dispatcher.OnRestart += Restart;
+		Start();
     }
     
     public void Unsubscribe()
@@ -25,7 +25,7 @@ public class Session : ScriptableObject
         Dispatcher.OnRestart -= Restart;
     }
 
-    public void Run()
+    private void Start()
     {
         _currentLevel = 0;
         CreateLevel(_currentLevel);
@@ -69,6 +69,6 @@ public class Session : ScriptableObject
     {
         _currentLevel = 0;
         _spawner.Rebut();
-        Run();
+        Start();
     }
 }

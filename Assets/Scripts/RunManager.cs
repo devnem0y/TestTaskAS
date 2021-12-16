@@ -13,7 +13,6 @@ public class RunManager : MonoBehaviour
         instance = this;
 
         DOTween.Init();
-        _session.Subscribe();
         _session.Run();
     }
 
