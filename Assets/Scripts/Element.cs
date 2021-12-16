@@ -9,11 +9,14 @@ public class Element : MonoBehaviour, IPointerClickHandler
     [SerializeField] private SpriteRenderer _image;
     [SerializeField] private SpriteRenderer _background;
     [SerializeField] private Color[] _backgroundColors;
+    private ParticleSystem _particleSystem;
     
     private String _identifier;
 
     private void Awake()
     {
+        _particleSystem = GetComponent<ParticleSystem>();
+        
         Dispatcher.OnStart += SessionStart;
         Dispatcher.OnLevelCompleted += LevelCompleted;
         Dispatcher.OnFailed += Failed;
@@ -42,7 +45,7 @@ public class Element : MonoBehaviour, IPointerClickHandler
         if (_identifier.Contains((string) arg))
         {
             PlayAnimationBounce(_image.transform, 0.15f);
-            // add particls
+            _particleSystem.Play();
         }
     }
     
